@@ -1,5 +1,7 @@
 package servlets;
 
+
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -28,7 +30,8 @@ public class VisitanteServlet extends HttpServlet {
 		
 		 		
 		try {
-
+			
+			
 			// PARAMETROS PARA REALIZAR AÇÕES DE ELETAR ATUALIZAR E EXCLUIR E PESQUISAR
 			CadastrarVisitanteDao dao = new CadastrarVisitanteDao();
 			String acao = request.getParameter("acao");
@@ -70,6 +73,8 @@ public class VisitanteServlet extends HttpServlet {
 		
 
 		try {
+			
+			
 
 			// AQUI COMEÇA O CÓDIGO PARA IMPLEMENTAR O METODO DE SALVAR VISITANTE ATUALIZAR E VALIDAR
 

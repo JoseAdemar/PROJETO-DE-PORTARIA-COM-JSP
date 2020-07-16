@@ -13,6 +13,8 @@
 <script type="text/javascript"
 	src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
 <!-- FIM DO LINK JQUERY PARA UPLOAD DE IMAGEM -->
+
+
 </head>
 <body>
 
@@ -39,7 +41,7 @@
 	<h1>BEM VINDOS A TELA DE CADASTRO DE VISITANTES</h1>
 
 	<!-- AQUI COMEÇA O CÓDIGO DO FORMULARIO PARA CADASTRO DE VISITANTES -->
-	<form action="VisitanteServlet" method="post">
+	<form action="VisitanteServlet" method="post" >
 
 		<table>
 
@@ -95,20 +97,12 @@
 			</tr>
 
 			<tr>
+				<td><img alt="Imagem" src="" id="target" width="200" height="200">
+					
+					 <input type="file" id="foto" name="foto"
+					width="200" height="200"  onchange="uploadFile();"/></td>
 
-                <td><img alt="Imagem" src="" id="target" width="200" height="200"></td>
-                
-				<td><input type="file" id="foto" name="foto" width="200" height="200" onchange="uploadFile();" value="${usuario.foto }"/></td>
-				
-				
-				
-
-				<!--  <td><a href="VisitanteServlet"></a></td> -->
 			</tr>
-
-
-
-
 			<tr>
 
 				<td><input type="submit" value="Salvar" /></td>
@@ -119,15 +113,27 @@
 
 	</form>
 
+
+
+
+
+
+
+
+
+	<!--  <td><a href="VisitanteServlet"></a></td> -->
+
+
+
 	<!-- AQUI TERMINA O CÓDIGO DO FORMULARIO PARA CADASTRO DE VISITANTES -->
 
 	<br />
 	<br />
 
 	<!-- AQUI COMEÇA O CÓDIGO PARA VISUALIZAR OS CADASTRO DE VISITANTES -->
-	
-	
-	   
+
+
+
 	<table border="1">
 
 		<tr>
@@ -150,7 +156,7 @@
 
 		<c:forEach items="${visitantes}" var="usuario">
 
-			
+
 			<tr>
 
 				<td><c:out value="${usuario.id }"></c:out></td>
@@ -161,9 +167,10 @@
 				<td><c:out value="${usuario.datetime}"></c:out></td>
 				<td><c:out value="${usuario.destino}"></c:out></td>
 				<td><c:out value="${usuario.motivo}"></c:out></td>
-	  		    <td><img width="200" height="200"src='<c:out value="${usuario.foto}"/>'></td>   
-				
- 
+				<td><img width="200" height="200"
+					src='<c:out value="${usuario.foto}"/>'></td>
+
+
 
 				<!-- AQUI COMEÇA O COMANDO PARA DELETAR LOGIN E ATUALIZAR LOGIN -->
 
@@ -210,6 +217,7 @@
 			// Upload Ajax
 			$.ajax({
 				method : "POST",
+				enctype : 'multipart/form-data',
 				url : "VisitanteServlet",
 				data : {
 					foto : reader.result
