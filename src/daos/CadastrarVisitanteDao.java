@@ -14,9 +14,7 @@ public class CadastrarVisitanteDao {
 
 	Connection conexao = ConexaoBanco.conectarDB();
 
-	
-
-	// METODO PARA CADASTRAR UM VISITANTE  NO SISTEMA
+	// METODO PARA CADASTRAR UM VISITANTE NO SISTEMA
 	public void cadastrarVisitante(VisitanteBean dados) {
 
 		try {
@@ -33,8 +31,6 @@ public class CadastrarVisitanteDao {
 			psm.setString(6, dados.getDestino());
 			psm.setString(7, dados.getMotivo());
 			psm.setString(8, dados.getFoto());
-			
-			
 
 			psm.execute();
 
@@ -44,6 +40,24 @@ public class CadastrarVisitanteDao {
 		}
 	}
 	// FIM DO METODO PARA CADASTRAR UM VISITANTE NO SISTEMA
+
+	// METODO PARA FAZER UPLOAD DA IMAGEM NO SISTEMA
+
+	public void uploadFotoVisitante(String foto, String id) {
+		try {
+			String sql = "UPDATE VISITANTE \n" + "SET foto = ? \n" + "WHERE id = ? ";
+
+			PreparedStatement psm = conexao.prepareStatement(sql);
+
+			psm.setString(1, foto);
+			psm.setString(2, id);
+
+			psm.executeUpdate();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		}
+	}
+	// FIM DO METODO PARA FAZER UPLOAD DA IMAGEM NO SISTEMA
 
 	// METODO PARA DELETAR UM VISITANTE
 
@@ -65,7 +79,8 @@ public class CadastrarVisitanteDao {
 
 	// FIM DO METODO PARA DELETAR UM VISITANTE
 
-	// METODO PARA LISTAR OS DADOS CADASTRADO NO FORMULARIO VISITANTE E SER VISUALIZADO
+	// METODO PARA LISTAR OS DADOS CADASTRADO NO FORMULARIO VISITANTE E SER
+	// VISUALIZADO
 	// NO NAVEGADOR
 
 	public List<VisitanteBean> listarVisitante() throws SQLException {
@@ -91,7 +106,6 @@ public class CadastrarVisitanteDao {
 			visitante.setDestino(rs.getString("destino"));
 			visitante.setMotivo(rs.getString("motivo"));
 			visitante.setFoto(rs.getString("foto"));
-			
 
 			listar.add(visitante);
 
@@ -124,10 +138,8 @@ public class CadastrarVisitanteDao {
 				visitante.setDestino(rs.getString("destino"));
 				visitante.setMotivo(rs.getString("motivo"));
 				visitante.setFoto(rs.getString("foto"));
-				
 
-				
-                return visitante;
+				return visitante;
 
 			}
 		} catch (Exception e) {
@@ -145,7 +157,8 @@ public class CadastrarVisitanteDao {
 	public void atualizarVisitante(VisitanteBean dados) {
 
 		try {
-			String sql = "update visitante set nome = ?, cpf = ?, rg = ?, telefone = ?, datetime = ?, destino = ?, motivo = ?, foto = ? where id = " + dados.getId();
+			String sql = "update visitante set nome = ?, cpf = ?, rg = ?, telefone = ?, datetime = ?, destino = ?, motivo = ? where id = "
+					+ dados.getId();
 			PreparedStatement psm = conexao.prepareStatement(sql);
 			psm.setString(1, dados.getNome());
 			psm.setString(2, dados.getCpf());
@@ -154,8 +167,8 @@ public class CadastrarVisitanteDao {
 			psm.setString(5, dados.getDatetime());
 			psm.setString(6, dados.getDestino());
 			psm.setString(7, dados.getMotivo());
-			psm.setString(8, dados.getFoto());
-			
+			//psm.setString(8, dados.getFoto());
+
 			psm.executeUpdate();
 
 		} catch (Exception e) {
@@ -187,8 +200,6 @@ public class CadastrarVisitanteDao {
 			visitante.setDestino(rs.getString("destino"));
 			visitante.setMotivo(rs.getString("motivo"));
 			visitante.setFoto(rs.getString("foto"));
-			
-
 
 			listaPesquisa.add(visitante);
 
@@ -197,9 +208,9 @@ public class CadastrarVisitanteDao {
 
 	}
 
-	// FIM DO METODO PARA PESQUISAR VISITANTES JÁ EXISTENTES NO SISTEMA NO CAMPO PESQUISA
-	
-	
+	// FIM DO METODO PARA PESQUISAR VISITANTES JÁ EXISTENTES NO SISTEMA NO CAMPO
+	// PESQUISA
+
 	// INICIO DO METODO PARA VALIDAR LOGIN DUPLICADO
 
 	public Boolean consultarVisitanteRepetido(String cpf) throws SQLException {
@@ -216,6 +227,6 @@ public class CadastrarVisitanteDao {
 		}
 		return false;
 	}
-	
+
 	// FIM DO METODO PARA VALIDAR LOGIN DUPLICADO
 }

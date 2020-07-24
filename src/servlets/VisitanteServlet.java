@@ -32,7 +32,7 @@ public class VisitanteServlet extends HttpServlet {
 		try {
 			
 			
-			// PARAMETROS PARA REALIZAR AÇÕES DE ELETAR ATUALIZAR E EXCLUIR E PESQUISAR
+			// PARAMETROS PARA REALIZAR AÃ‡Ã•ES DE ELETAR ATUALIZAR E EXCLUIR E PESQUISAR
 			CadastrarVisitanteDao dao = new CadastrarVisitanteDao();
 			String acao = request.getParameter("acao");
 			String usuario = request.getParameter("usuario");
@@ -75,8 +75,7 @@ public class VisitanteServlet extends HttpServlet {
 		try {
 			
 			
-
-			// AQUI COMEÇA O CÓDIGO PARA IMPLEMENTAR O METODO DE SALVAR VISITANTE ATUALIZAR E VALIDAR
+			// AQUI COMEï¿½A O Cï¿½DIGO PARA IMPLEMENTAR O METODO DE SALVAR VISITANTE ATUALIZAR E VALIDAR
 
 			String id = request.getParameter("id");
 			String nome = request.getParameter("nome");
@@ -89,50 +88,48 @@ public class VisitanteServlet extends HttpServlet {
 			String foto = request.getParameter("foto");
 			//System.out.println(foto);
 			//String typefoto = request.getParameter("typefoto");
-			
-			
-			
+
 
 			CadastrarVisitanteDao dao = new CadastrarVisitanteDao();
 			VisitanteBean visitante = new VisitanteBean();
-			
-			
-			//visitante.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
-			//visitante.setId(id !=null && id != "" ? Long.parseLong(id) : 0);
-			visitante.setId(id !=null && id != "" ? Long.parseLong(id) : null);
-			//visitante.setId(Long.parseLong(id));
-			
-			visitante.setNome(nome);
-			visitante.setCpf(cpf);
-			visitante.setRg(rg);
-			visitante.setTelefone(telefone);
-			visitante.setDatetime(datetime);
-			visitante.setDestino(destino);
-			visitante.setMotivo(motivo);
-			visitante.setFoto(foto);
-			
-			
 
-			if (id == null || id.isEmpty() && dao.consultarVisitanteRepetido(cpf) ) {
 
-				dao.cadastrarVisitante(visitante);
-
+			if (foto != null) {
+				dao.uploadFotoVisitante(foto, id);
 			} else {
+				//visitante.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
+				visitante.setId(id != null && id != "" ? Long.parseLong(id) : 0);
+				visitante.setNome(nome);
+				visitante.setCpf(cpf);
+				visitante.setRg(rg);
+				visitante.setTelefone(telefone);
+				visitante.setDatetime(datetime);
+				visitante.setDestino(destino);
+				visitante.setMotivo(motivo);
+				visitante.setFoto(foto);
+				//visitante.setTypefoto(typefoto);
 
-				dao.atualizarVisitante(visitante);
 
-				
+				if (id == null || id.isEmpty() && dao.consultarVisitanteRepetido(cpf)) {
+
+					dao.cadastrarVisitante(visitante);
+
+				} else {
+
+					dao.atualizarVisitante(visitante);
+
+
+				}
 			}
 
-			// AQUI TERMINA O CÓDIGO PARA IMPLEMENTAR O METODO DE SALVAR VISITANTE ATUALIZAR E VALIDAR
-		}
 
-		catch (Exception e) {
+			// AQUI TERMINA O Cï¿½DIGO PARA IMPLEMENTAR O METODO DE SALVAR VISITANTE ATUALIZAR E VALIDAR
+		} catch (Exception e) {
 			e.printStackTrace();
-			
+
 		}
 
-		// AQUI COMEÇA O CÓDIGO PARA VISUALIZAR OS VISITANTES CADASTRADOS
+		// AQUI COMEï¿½A O Cï¿½DIGO PARA VISUALIZAR OS VISITANTES CADASTRADOS
 		try {
 			CadastrarVisitanteDao dao = new CadastrarVisitanteDao();
 
@@ -146,9 +143,8 @@ public class VisitanteServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 
-		// AQUI TERMINA O CÓDIGO PARA VISUALIZAR OS VISITANTES CADASTRADOS
-		
-		
+		// AQUI TERMINA O Cï¿½DIGO PARA VISUALIZAR OS VISITANTES CADASTRADOS
+
 
 	}
 
