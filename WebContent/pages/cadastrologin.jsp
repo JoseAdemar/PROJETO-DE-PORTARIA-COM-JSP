@@ -9,22 +9,27 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro de login</title>
+
+<link href="resources/css/estiloformulariologin.css" rel="stylesheet">
+<link href="resources/css/estilopesquisalogin.css" rel="stylesheet">
+
 </head>
 <body>
 
 	<!-- AQUI COMEÇA O CÓDIGO PARA REALIZAR PESQUISA DE LOGINS NO SISTEMA -->
 
-	<div>
+	<br />
+
+	<div id='busca'>
 		<form class="search" action="PesquisarLogins" method="POST">
 
-			<input id="txbusca" name="pesquisa" type="text" value=""placeholder="Digite o que você procura"/> 
-				
-				
-			<input id="btnBusca"type="submit" value="Pesquisar" />
-			<input type="submit" value="Voltar" />
-			
-			<input TYPE="button" VALUE="Home"
-             onclick="window.location.href='menu.jsp'"> 
+
+
+			<input id="btnBusca1" name="pesquisa" type="text" value=""
+				placeholder="Digite o que você procura" /> <input id="btnBusca"
+				type="submit" value="Pesquisar" /> <input type="submit" id="button"
+				value="Voltar" /> <input TYPE="button" id="button" VALUE="Home"
+				onclick="window.location.href='menu.jsp'">
 
 
 		</form>
@@ -35,10 +40,15 @@
 
 
 
-	<h1>Bem vindo a tela cadastro de login</h1>
+
 
 	<!-- AQUI COMEÇA O CÓDIGO DO FORMULARIO PARA CADASTRO DE LOGINS -->
-	<form action="LoginServlet" method="post">
+	
+	
+	<h1 style="color: teal; font-family: cursive;">Bem vindo a área de cadastro de login</h1>
+
+
+<form action="LoginServlet" method="post">
 
 		<table>
 
@@ -61,49 +71,65 @@
 			</tr>
 
 
-
 			<tr>
 
-				<td><input type="submit" value="Cadastrar" /></td>
-				<td><input type="reset" value="Cancelar" /></td>
+                <td><input type="submit" id="button"value="Cadastrar" /></td>
+				
+				<td><input type="reset" id="button"value="Cancelar" /></td>
 			</tr>
 
 		</table>
 
 	</form>
 
+
+
 	<!-- AQUI TERMINA O CÓDIGO DO FORMULARIO PARA CADASTRO DE LOGINS -->
 
-	<br />
-	<br />
+
 
 	<!-- AQUI COMEÇA O CÓDIGO PARA VISUALIZAR OS CADASTRO DE LOGINS -->
 
-	<table border="1">
+	<br />
+	<br />
 
-		<tr>
+    
+    
+	<table >
+
+		<tr style="color: olive; font-family:Lucida Bright; font-size: 15px">
+			
 			<th>ID</th>
-			<th>Login</th>
+			
+            <th>Login</th>
+            
 			<th>Senha</th>
+			
 			<th>Excluir</th>
-			<th>Editar</th>
-
+			
+		<!--  	<th>Editar</th>  -->
+            
 
 		</tr>
 
 		<c:forEach items="${logins}" var="usuario">
+		
+		 
 
 			<tr>
 
+               
 				<td><c:out value="${usuario.id }"></c:out></td>
 				<td><c:out value="${usuario.login }"></c:out></td>
-				<td><c:out value="${usuario.senha}"></c:out></td>
+			<!--  	<td><c:out value="${usuario.senha}"></c:out></td> -->
 
 
 				<!-- AQUI COMEÇA O COMANDO PARA DELETAR LOGIN E ATUALIZAR LOGIN -->
 
-				<td><a href="LoginServlet?acao=deletar&usuario=${usuario.id}">Excluir</a></td>
-				<td><a href="LoginServlet?acao=editar&usuario=${usuario.id}">Editar</a></td>
+				<td><a href="LoginServlet?acao=deletar&usuario=${usuario.id}">
+				<img alt="" src="resources/images/excluir.png" width="20px" height="20px"></a></td>
+				<td><a href="LoginServlet?acao=editar&usuario=${usuario.id}">
+				<img alt="" src="resources/images/editar.png" width="20px" height="20px"></a></td>
 
 
 
@@ -120,7 +146,11 @@
 
 	</table>
 
+
+
 	<!-- AQUI TERMINA O CÓDIGO PARA VISUALIZAR OS CADASTRO DE LOGINS -->
+
+
 
 
 

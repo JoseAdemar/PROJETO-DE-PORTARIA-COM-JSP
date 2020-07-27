@@ -13,6 +13,18 @@
     <script type="text/javascript"
             src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
     <!-- FIM DO LINK JQUERY PARA UPLOAD DE IMAGEM -->
+    
+    <link href="resources/css/estilopesquisavisitante.css" rel="stylesheet">
+    
+    
+    <script>
+    
+     var cadastrar = document.getElementById("cadastrar");
+     botao.addEventListener('cadastrar', function () {
+		alert("Salvo com sucesso !")
+	})
+    
+    </script>
 </head>
 <body>
 
@@ -21,12 +33,14 @@
 <div>
     <form class="search" action="PesquisarVisitante" method="POST">
 
-        <input id="txbusca" name="pesquisa" type="text" value=""
-               placeholder="Digite o que você procura"/> <input id="btnBusca"
-                                                                type="submit" value="Pesquisar"/> <input type="submit"
-                                                                                                         value="Voltar"/>
-        <input TYPE="button" VALUE="Home"
-               onclick="window.location.href='menu.jsp'">
+        <input id="btnBusca1" name="pesquisa" type="text" value=""
+               placeholder="Digite o que você procura"/>
+               
+        <input id="btnBusca"type="submit" value="Pesquisar"/>
+        
+        <input type="submit" id="button"
+				value="Voltar" /> <input TYPE="button" id="button" VALUE="Home"
+				onclick="window.location.href='menu.jsp'">
 
 
     </form>
@@ -35,7 +49,7 @@
 <!-- AQUI TERMINA O CÓDIGO PARA REALIZAR PESQUISA DE VISITANTES NO SISTEMA -->
 
 
-<h1>BEM VINDOS A TELA DE CADASTRO DE VISITANTES</h1>
+<h1 style="color: teal; font-family: cursive;">Bem vindos a área de cadastro de visitantes</h1>
 
 <!-- AQUI COMEÇA O CÓDIGO DO FORMULARIO PARA CADASTRO DE VISITANTES -->
 <form action="VisitanteServlet" method="post">
@@ -92,17 +106,25 @@
             <td><input type="text" required id="motivo" name="motivo"
                        value="${usuario.motivo }"/></td>
         </tr>
-
+        
+    
        
         <tr>
 
-            <td><input type="submit" value="Salvar"/></td>
-            <td><input type="reset" value="Cancelar"/></td>
+             <td><input type="submit" id="button"value="Cadastrar" /></td>
+				
+				<td><input type="reset" id="button"value="Cancelar" /></td>
         </tr>
+        
+       
+        
 
     </table>
-
+    
+     
 </form>
+
+ 
 
 <!-- AQUI TERMINA O CÓDIGO DO FORMULARIO PARA CADASTRO DE VISITANTES -->
 
@@ -112,10 +134,45 @@
 <!-- AQUI COMEÇA O CÓDIGO PARA VISUALIZAR OS CADASTRO DE VISITANTES -->
 
 
+<!-- ################### -->
+
 <table border="1">
+
+
 
     <tr>
 
+        
+        <th>Foto</th>
+        <th>Upload</th>
+       
+        
+    </tr>
+    
+     
+     
+    <c:forEach items="${visitantes}" var="usuario">
+    
+    
+        
+        <tr>
+
+            
+            
+            <td><img width="200" height="200" src='<c:out value="${usuario.foto}"/>'></td>
+        
+            <td><input type="file" id="foto${usuario.id}" name="foto" style="display: none"
+                       onchange="uploadFile(${usuario.id });"/>
+                <button type="button" onclick="triggerUpload(${usuario.id })"> Carregar imagem</button>
+            </td>
+
+         
+
+        </tr>
+        
+       
+        
+         <tr>
         <th>ID</th>
         <th>Nome</th>
         <th>CPF</th>
@@ -124,21 +181,18 @@
         <th>DataHora</th>
         <th>Destino</th>
         <th>Motivo</th>
-        <th>Foto</th>
-
         <th>Excluir</th>
         <th>Editar</th>
-        <th>Upload de imagem</th>
-
-
-    </tr>
-
-    <c:forEach items="${visitantes}" var="usuario">
-
-
+        
+        </tr>
+        
+       
+        
         <tr>
-
-            <td><c:out value="${usuario.id }"></c:out></td>
+        
+      
+        
+        <td><c:out value="${usuario.id }"></c:out></td>
             <td><c:out value="${usuario.nome }"></c:out></td>
             <td><c:out value="${usuario.cpf}"></c:out></td>
             <td><c:out value="${usuario.rg}"></c:out></td>
@@ -146,34 +200,38 @@
             <td><c:out value="${usuario.datetime}"></c:out></td>
             <td><c:out value="${usuario.destino}"></c:out></td>
             <td><c:out value="${usuario.motivo}"></c:out></td>
-            <td><img width="200" height="200" src='<c:out value="${usuario.foto}"/>'></td>
-
-
-            <!-- AQUI COMEÇA O COMANDO PARA DELETAR LOGIN E ATUALIZAR LOGIN -->
-
-            <td><a
-                    href="VisitanteServlet?acao=deletar&usuario=${usuario.id}">Excluir</a></td>
-            <td><a
-                    href="VisitanteServlet?acao=editar&usuario=${usuario.id}">Editar</a></td>
-
-            <td><input type="file" id="foto${usuario.id}" name="foto" style="display: none"
-                       onchange="uploadFile(${usuario.id });"/>
-                <button type="button" onclick="triggerUpload(${usuario.id })"> Upload de imagem</button>
-            </td>
-
-            <!--  <td><a href="VisitanteServlet"></a></td> -->
-
-
-            <!-- AQUI TERMINA O COMANDO PARA DELETAR LOGIN E ATUALIZAR LOGIN -->
-
-
+            
+             <td align="center"><a
+                    href="VisitanteServlet?acao=deletar&usuario=${usuario.id}"
+            onclick="return confirm('Deseja Excluir ?');">
+                    <img alt="" src="resources/images/excluir.png" width="20" height="20"></a></td>
+            <td align="center"><a
+                    href="VisitanteServlet?acao=editar&usuario=${usuario.id}">
+                    <img alt="" src="resources/images/editar.png" width="20" height="20"></a></td>
+                    
+           
+        
+        
         </tr>
-
+        
+         <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+        <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+        <tr></tr>
+        
+         <td bgcolor="red"></td>
+        
+        <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+        <tr></tr><tr></tr><tr></tr><tr></tr><tr></tr><tr></tr>
+        <tr></tr>
 
     </c:forEach>
 
 
 </table>
+
+
+<!-- ################### -->
+
 
 <!-- AQUI TERMINA O CÓDIGO PARA VISUALIZAR OS CADASTRO DE LOGINS -->
 

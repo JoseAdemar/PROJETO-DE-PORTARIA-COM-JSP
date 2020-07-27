@@ -76,6 +76,7 @@ public class LoginServlet extends HttpServlet {
 			CadastrarLoginDao dao = new CadastrarLoginDao();
 			LoginBean loginBean = new LoginBean();
 			loginBean.setId(!id.isEmpty() ? Long.parseLong(id) : 0);
+			
 			loginBean.setLogin(login);
 			loginBean.setSenha(senha);
 

@@ -79,17 +79,17 @@
 					
 					
 					<li><a href="VisitanteServlet?acao=listartodos"> <img
-							title="Cadastro de visitante" src="resources/images/cadastro.png"
+							title="CADASTRO DE VISITANTES" src="resources/images/cadastro.png"
 							width="65px" height="65px"></a></li>
 							
 							
-					<li><a href="#services"><img alt="Cadastro de visitante"
+					<li><a href="#services"><img title="LISTA DE RAMAIS"
 							src="resources/images/telefone.png" width="70px" height="77px"></a></li>
 							
 							
 					<li><a href="LoginServlet?acao=listartodos"> <img
-							alt="Cadastro de visitante" src="resources/images/login2.png"
-							width="70px" height="65px"></a></li>
+							title="CADASTRO DE LOGIN" src="resources/images/login.png"
+							width="65px" height="60px"></a></li>
 					<li><a href="../index.jsp">Sair</a></li>
 				</ul>
 
