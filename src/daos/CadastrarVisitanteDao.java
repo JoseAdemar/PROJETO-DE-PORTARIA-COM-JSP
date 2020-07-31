@@ -87,7 +87,7 @@ public class CadastrarVisitanteDao {
 
 		List<VisitanteBean> listar = new ArrayList<VisitanteBean>();
 
-		String sql = "select * from visitante";
+		String sql = "select * from visitante Order by ID Desc";
 
 		PreparedStatement psm = conexao.prepareStatement(sql);
 
