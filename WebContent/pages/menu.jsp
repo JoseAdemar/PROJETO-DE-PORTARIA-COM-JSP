@@ -1,3 +1,4 @@
+<%@page import="beans.LoginBean"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -6,7 +7,7 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Rapid Bootstrap Template</title>
+<title>Home</title>
 <meta content="width=device-width, initial-scale=1.0" name="viewport">
 <meta content="" name="keywords">
 <meta content="" name="description">
@@ -47,6 +48,21 @@
 </head>
 
 <body>
+
+ <!--  CODIGO PARA APARECER O NOME DO USUARIO AUTENTICADO -->
+ 
+   <%
+   
+    LoginBean loginBean = (LoginBean)session.getAttribute("usuAutenticado");
+   
+    out.print("Seja bem vindo ! " + loginBean.getLogin());
+    
+         
+   %>
+ 
+ <!--  FIM DO CODIGO PARA APARECER O NOME DO USUARIO AUTENTICADO -->
+
+
 	<!--==========================
   Header
   ============================-->
@@ -90,7 +106,7 @@
 					<li><a href="LoginServlet?acao=listartodos"> <img
 							title="CADASTRO DE LOGIN" src="resources/images/login.png"
 							width="65px" height="60px"></a></li>
-					<li><a href="../index.jsp">Sair</a></li>
+					<li><a href="deslogar.jsp">Sair</a></li>
 				</ul>
 
 			</nav>

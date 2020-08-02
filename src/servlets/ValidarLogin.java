@@ -3,12 +3,12 @@ package servlets;
 import java.io.IOException;
 import java.sql.SQLException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import beans.LoginBean;
 import daos.CadastrarLoginDao;
@@ -25,6 +25,7 @@ public class ValidarLogin extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -35,7 +36,7 @@ public class ValidarLogin extends HttpServlet {
 		try {
 			String login = request.getParameter("login");
 			String senha = request.getParameter("senha");
-
+			
 			CadastrarLoginDao dao = new CadastrarLoginDao();
 			LoginBean loginBean = new LoginBean();
 
@@ -45,14 +46,23 @@ public class ValidarLogin extends HttpServlet {
 			dao.validarAcessoLogin(login, senha);
 
 			if (dao.validarAcessoLogin(login, senha)) {
+				
+				
+				//COMEÇA O CODIGO DE SESSAO
+				
+				HttpSession sessao = request.getSession();
+				
+				sessao.setAttribute("usuAutenticado", loginBean);
+				
+				// TERMINA O CODIGO DE SESSAO
 
 				response.sendRedirect("pages/menu.jsp");
-
+				
+				
 			} else {
-
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
-				dispatcher.forward(request, response);
-
+				
+				response.sendRedirect("index.jsp");
+				
 			}
 
 		} catch (SQLException e) {
